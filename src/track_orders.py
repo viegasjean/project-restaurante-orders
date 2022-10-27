@@ -18,6 +18,13 @@ class TrackOrders:
         )
         return customer_orders.most_common(1)[0][0]
 
+    def get_times_order_ordered_dish_per_customer(self, customer, order):
+        return len([
+            i["order"]
+            for i in self.data
+            if i["customer"] == customer and i["order"] == order
+        ])
+
     def get_set_of_all_customer_orders(self):
         return set(i["order"] for i in self.data)
 
