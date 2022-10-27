@@ -16,10 +16,21 @@ class InventoryControl:
     }
 
     def __init__(self):
-        pass
+        self.orders = []
+        self.inventory = {
+            'pao': 0,
+            'carne': 0,
+            'queijo': 0,
+            'molho': 0,
+            'presunto': 0,
+            'massa': 0,
+            'frango': 0,
+        }
 
     def add_new_order(self, customer, order, day):
-        pass
+        self.orders.append({'customer': customer, 'order': order, 'day': day})
+        for ingredient in self.INGREDIENTS[order]:
+            self.inventory[ingredient] += 1
 
     def get_quantities_to_buy(self):
-        pass
+        return self.inventory
