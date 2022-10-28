@@ -41,12 +41,18 @@ class InventoryControl:
         return self.inventory
 
     def get_available_inventory(self):
-        return set(k for k, i in self.inventory.items() if i > 0)
+        return set({k, i} for k, i in self.inventory.items() if i > 0)
 
     def get_available_dishes(self):
         avaiable = set()
-        print(self.get_available_inventory())
+        avaiable_ingredients = set()
+
+        for k, v in self.MINIMUM_INVENTORY.items():
+            if self.inventory[k] < v:
+                avaiable_ingredients.add(k)
+
         for k, i in self.INGREDIENTS.items():
-            # print(set(i))
-            avaiable.add(k)
+            if set(i).issubset(avaiable_ingredients):
+                avaiable.add(k)
+
         return avaiable
